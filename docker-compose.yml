@@ -1,0 +1,15 @@
+  version: '3'
+
+  services:
+    holter-devops:
+      build: .
+      image: harbor.tce.rn.gov.br/metrics/holter-devops
+      ports:
+        - 8200:8080
+      environment:
+        DATABASE_PATH: /data
+        MAIL_ACCOUNT: smartmetropolis@imd.ufrn.br
+        MAIL_PASSWORD: 'blmetrosmart20'
+        TOKEN_SECRET: aaaaaaaa00000
+      volumes:
+        - /data/holter:/data
