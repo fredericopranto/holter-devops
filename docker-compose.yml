@@ -1,9 +1,36 @@
   version: '3'
 
+  networks:
+    holter-devops-network:
+      name: holter-devops
+
   services:
+    postgres:
+      image: postgres:11
+      hostname: postgres
+      ports:
+        - 5432:5432
+      volumes:
+        - ./postgres:/var/lib/postgresql/data
+        - ./sql:/docker-entrypoint-initdb.d
+      networks:
+        - holter-devops-network
+      environment:
+        POSTGRES_DB: holter-devops
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+      restart: always
+      healthcheck:
+        test: ["CMD-SHELL", "pg_isready -d holter-devops -U postgres"]
+        interval: 10s
+        timeout: 30s
+        retries: 10
+    
     holter-devops:
       build: .
       image: harbor.tce.rn.gov.br/metrics/holter-devops
+      networks:
+        - holter-devops-network
       ports:
         - 8200:8080
       environment:
@@ -13,3 +40,20 @@
         TOKEN_SECRET: aaaaaaaa00000
       volumes:
         - /data/holter:/data
+   
+
+    # flyway:
+    #   container_name: flyway
+    #   image: flyway/flyway:9.15-alpine
+    #   volumes:
+    #     - ./src/main/resources/V0.1__schema_postgres.sql:/flyway/sql/V1.0__schema_postgres.sql
+    #   networks:
+    #     - holter-devops-network
+    #   environment:
+    #     - FLYWAY_USER=postgres
+    #     - FLYWAY_PASSWORD=postgres
+    #     - FLYWAY_URL=jdbc:postgresql://postgres:5432/holter-devops
+    #     - FLYWAY_BASELINE_VERSION=0.0
+    #   command: -connectRetries=60 -baselineOnMigrate=true migrate
+    #   depends_on:
+    #    - postgres

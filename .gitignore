@@ -87,3 +87,6 @@ local.properties
 
 ### MAC OS ###
 .DS_Store
+
+## DB
+postgres
