@@ -54,7 +54,8 @@ class CommitPerDayGitlabCollector
 
         var commitsOfPeriod: List<GitLabCommitInfo>
 
-        commitsOfPeriod = executor.getCommits(project.organization + "/" +project.name)
+        // commitsOfPeriod = executor.getCommits(project.organization + "/" +project.name)
+        commitsOfPeriod = executor.getCommits(project.name)
 
         val qtdTotalDays = dateUtil.daysBetweenInclusiveWithOutWeekends(period.init, period.end)  // include the start and end.
 

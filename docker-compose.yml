@@ -12,7 +12,7 @@
         - 5432:5432
       volumes:
         - ./postgres:/var/lib/postgresql/data
-        - ./sql:/docker-entrypoint-initdb.d
+        - ./initdb:/docker-entrypoint-initdb.d
       networks:
         - holter-devops-network
       environment:
@@ -32,28 +32,36 @@
       networks:
         - holter-devops-network
       ports:
-        - 8200:8080
+        - 8080:8080
       environment:
         DATABASE_PATH: /data
-        MAIL_ACCOUNT: smartmetropolis@imd.ufrn.br
-        MAIL_PASSWORD: 'blmetrosmart20'
-        TOKEN_SECRET: aaaaaaaa00000
+        TOKEN_SECRET: 6aca05987fcaf7aadd24f158106df506d3d6ef7a6f40c12014a002b72ecc9b394db118836650beb89627f75f454217544ba3de7948252de0f6dac17af2f080ab
       volumes:
         - /data/holter:/data
-   
+      healthcheck:
+        test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://holter-devops:8080/holter/api/test || exit 1"]
+        interval: 30s
+        timeout: 10s
+        retries: 3
+      depends_on:
+        postgres:
+          condition: service_healthy
 
-    # flyway:
-    #   container_name: flyway
-    #   image: flyway/flyway:9.15-alpine
-    #   volumes:
-    #     - ./src/main/resources/V0.1__schema_postgres.sql:/flyway/sql/V1.0__schema_postgres.sql
-    #   networks:
-    #     - holter-devops-network
-    #   environment:
-    #     - FLYWAY_USER=postgres
-    #     - FLYWAY_PASSWORD=postgres
-    #     - FLYWAY_URL=jdbc:postgresql://postgres:5432/holter-devops
-    #     - FLYWAY_BASELINE_VERSION=0.0
-    #   command: -connectRetries=60 -baselineOnMigrate=true migrate
-    #   depends_on:
-    #    - postgres
+    flyway:
+      container_name: flyway
+      image: flyway/flyway:9.15-alpine
+      volumes:
+        - ./sql:/flyway/sql
+      networks:
+        - holter-devops-network
+      environment:
+        - FLYWAY_USER=postgres
+        - FLYWAY_PASSWORD=postgres
+        - FLYWAY_URL=jdbc:postgresql://postgres:5432/holter-devops
+        - FLYWAY_BASELINE_VERSION=0.0
+      command: -connectRetries=60 -baselineOnMigrate=true migrate
+      depends_on:
+        postgres:
+          condition: service_healthy
+        holter-devops:
+          condition: service_healthy
