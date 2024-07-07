@@ -65,6 +65,16 @@ class Project {
     var organization : String = "";
 
     /**
+     * Computes the project path based on the organization and name.
+     * If the organization is null, empty, or contains only whitespace,
+     * returns just the name. Otherwise, returns "<organization>/<name>".
+     */
+    val projectPath: String
+        get() {
+            return if (organization.trim().isBlank()) name else "$organization.trim()/$name"
+        }
+
+    /**
      * Say if the project is active or not. A disabled project the
      * tool will not collect metrics any more.
      *

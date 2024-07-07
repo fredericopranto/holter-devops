@@ -64,7 +64,7 @@ class IssuesLeadTimeGitlabCollector
 
         // bring all issues first time to memory
         if(issuesCache.isEmpty()){
-            val allIssues = executor.issuesInPeriod(project.organization + "/" +project.name, globalPeriod.init, globalPeriod.end)
+            val allIssues = executor.issuesInPeriod(project.projectPath, globalPeriod.init, globalPeriod.end)
             issuesCache = allIssues
         }
 

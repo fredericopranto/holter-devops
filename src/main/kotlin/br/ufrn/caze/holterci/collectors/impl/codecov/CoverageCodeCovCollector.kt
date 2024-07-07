@@ -30,7 +30,7 @@ class CoverageCodeCovCollector
         // executor.setQueryParameters("from=" + dateUtil.toString(period.init) + "&to=" + dateUtil.toString(period.end))
         // executor.setLimit(250)
 
-        var commitsInPeriod : List<CodeCovCommit>  = executor.getCommits(project.organization + "/" +project.name, AbstractCodeCovQueryExecutor.CODE_COV_BASE.GITHUB, period.init, period.end)
+        var commitsInPeriod : List<CodeCovCommit>  = executor.getCommits(project.projectPath, AbstractCodeCovQueryExecutor.CODE_COV_BASE.GITHUB, period.init, period.end)
 
         //val executor = CoverageCodeCovExecutor()
         //return executor.getCoverage(project.organization+"/"+project.name, period.init, period.end)

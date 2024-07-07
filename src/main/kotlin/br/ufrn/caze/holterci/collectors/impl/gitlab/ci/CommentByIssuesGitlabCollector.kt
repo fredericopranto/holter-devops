@@ -71,7 +71,7 @@ class CommentByIssuesGitlabCollector
         executor.setPageSize(100)
 
         if(cache.isEmpty()){
-            var all = executorIssues.issues(project.organization + "/" + project.name)
+            var all = executorIssues.issues(project.projectPath)
             cache = all
         }
 
@@ -81,7 +81,7 @@ class CommentByIssuesGitlabCollector
         var commentsOfAnalysis : MutableList<CommentOfAnalysis> = ArrayList()
 
         for (issue in issueInPeriod) {
-            val allCommentsList =  executor.getIssueDiscussion(project.organization + "/" + project.name, issue.iid)
+            val allCommentsList =  executor.getIssueDiscussion(project.projectPath, issue.iid)
 
             // split the qtd of comments by PR
             for (c in allCommentsList) {

@@ -64,7 +64,7 @@ class BuildActivityGitlabCollector
         executor.setPageSize(100)
 
         if(cache.isEmpty()){
-            var all : List<GitLabPipelineInfo> = executor.getPipeLines(project.organization + "/" +project.name)
+            var all : List<GitLabPipelineInfo> = executor.getPipeLines(project.projectPath)
             cache = all
         }else{
             println("$$$$$$$$$$ reusing the cache $$$$$$$$$")

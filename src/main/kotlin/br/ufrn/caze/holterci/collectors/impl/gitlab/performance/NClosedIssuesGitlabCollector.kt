@@ -64,7 +64,7 @@ class NClosedIssuesGitlabCollector
 
         // bring all issues first time to memory
         if(issuesCache.isEmpty()){
-            var allIssues = executor.issuesInPeriod(project.organization + "/" +project.name, globalPeriod.init, globalPeriod.end)
+            var allIssues = executor.issuesInPeriod(project.projectPath, globalPeriod.init, globalPeriod.end)
             issuesCache = allIssues
         }
         var issuesOfPeriod = gitLabUtils.getIssueClosedInPeriod(issuesCache, period.init, period.end)

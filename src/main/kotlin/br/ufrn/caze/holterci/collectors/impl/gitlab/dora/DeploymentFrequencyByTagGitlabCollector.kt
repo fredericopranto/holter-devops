@@ -72,7 +72,7 @@ class DeploymentFrequencyByTagGitlabCollector
         /**
          * This will considerer a release a tag, bacause some places do not create release on gitlab
          */
-        var allTags : MutableList<GitLabTagInfo> = executor.tags(project.organization + "/" + project.name)
+        var allTags : MutableList<GitLabTagInfo> = executor.tags(project.projectPath)
 
         var tagsOfPeriod : MutableList<GitLabTagInfo> = arrayListOf()
 

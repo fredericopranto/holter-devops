@@ -71,7 +71,7 @@ class CommentByMergeRequestGitlabCollector
         executor.setPageSize(100)
 
         if(cache.isEmpty()){
-            var all = executorMergs.mergeRequests(project.organization + "/" + project.name)
+            var all = executorMergs.mergeRequests(project.projectPath)
             cache = all
         }
 
@@ -80,7 +80,7 @@ class CommentByMergeRequestGitlabCollector
         var commentsOfAnalysis : MutableList<CommentOfAnalysis> = ArrayList()
 
         for (mergeRequest in mergeInPeriod) {
-            val allCommentsList =  executor.getMergeRequestDiscussion(project.organization + "/" + project.name, mergeRequest.iid)
+            val allCommentsList =  executor.getMergeRequestDiscussion(project.projectPath, mergeRequest.iid)
 
             // split the qtd of comments by PR
             for (c in allCommentsList) {

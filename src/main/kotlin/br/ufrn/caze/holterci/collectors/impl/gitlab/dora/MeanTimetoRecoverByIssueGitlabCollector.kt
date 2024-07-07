@@ -92,7 +92,7 @@ class MeanTimetoRecoverByIssueGitlabCollector
 
         // bring all issues first time to memory
         if(issuesCache.isEmpty()){
-            var allIssues = executor.issuesInPeriod(project.organization + "/" +project.name, globalPeriod.init, globalPeriod.end)
+            var allIssues = executor.issuesInPeriod(project.projectPath, globalPeriod.init, globalPeriod.end)
             issuesCache = allIssues
         }
         var issuesInPeriod = gitLabUtils.getIssueClosedInPeriod(issuesCache, period.init, period.end)
@@ -113,7 +113,7 @@ class MeanTimetoRecoverByIssueGitlabCollector
         /**
          * This will considerer a release a tag, bacause some places do not create release on gitlab
          */
-        var allTags : MutableList<GitLabTagInfo> = executorTags.tags(project.organization + "/" + project.name)
+        var allTags : MutableList<GitLabTagInfo> = executorTags.tags(project.projectPath)
 
         var tagsOfPeriod : MutableList<GitLabTagInfo> = arrayListOf()
 

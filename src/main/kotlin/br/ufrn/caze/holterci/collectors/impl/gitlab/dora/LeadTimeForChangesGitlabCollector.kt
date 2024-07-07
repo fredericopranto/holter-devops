@@ -75,7 +75,7 @@ class LeadTimeForChangesGitlabCollector
 
         var commitsOfPeriod : List<GitLabCommitInfo>
 
-        commitsOfPeriod = executor.getCommits(project.organization + "/" + project.name)
+        commitsOfPeriod = executor.getCommits(project.projectPath)
 
         // commit merge production branch - commit create date
         val commitsLeadTime : MutableList<Long> = arrayListOf()
@@ -90,7 +90,7 @@ class LeadTimeForChangesGitlabCollector
 
             // get the time when the merge request associated with this commit was merged in "prodution" branch
             val mergeList =
-                executorMergs.listMergeRequestsAssociatedwithCommit(project.organization + "/" + project.name, commit.id)
+                executorMergs.listMergeRequestsAssociatedwithCommit(project.projectPath, commit.id)
 
             mergeRequests@
             for (mergeRequest in mergeList) {

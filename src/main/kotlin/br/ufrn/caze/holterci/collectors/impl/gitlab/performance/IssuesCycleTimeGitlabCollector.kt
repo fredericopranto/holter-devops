@@ -162,7 +162,7 @@ class IssuesCycleTimeGitlabCollector
         commitExecutor.setQueryParameters(arrayOf("since=" + dateUtil.toIso8601(period.init), "until=" + dateUtil.toIso8601(period.end)))
 
         var commitsInPeriod : List<GitLabCommitInfo>
-        commitsInPeriod = commitExecutor.getCommits(project.organization + "/" + project.name)
+        commitsInPeriod = commitExecutor.getCommits(project.projectPath)
         return commitsInPeriod
     }
 
@@ -180,7 +180,7 @@ class IssuesCycleTimeGitlabCollector
 
         // bring all issues first time to memory
         if (issuesCache.isEmpty()) {
-            var allIssues = issueExecutor.issues(project.organization + "/" + project.name)
+            var allIssues = issueExecutor.issues(project.projectPath)
             issuesCache = allIssues
         }
 

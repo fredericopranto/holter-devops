@@ -74,7 +74,7 @@ class NClosedMergeRequestsGitabCollector
 
         // bring all issues first time to memory
         if(mergeRequestCache.isEmpty()){
-            var allMerges = executor.mergeRequestsInPeriod(project.organization + "/" +project.name, globalPeriod.init, globalPeriod.end)
+            var allMerges = executor.mergeRequestsInPeriod(project.projectPath, globalPeriod.init, globalPeriod.end)
             mergeRequestCache = allMerges
         }
 

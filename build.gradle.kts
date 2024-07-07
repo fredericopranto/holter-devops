@@ -72,7 +72,7 @@ dependencies {
 	 * my library to manipulate CSV files file("lib/junit.jar")
 	 * my library to miner information of main repositories (github, travisCI, SonarCloud, etc..)
 	 */
-	implementation (files("libs/snooper-2.13.jar"))
+	implementation (files("libs/snooper-2.14.jar"))
 	implementation (files("libs/gauge-ci-1.4b-plain.jar"))
 	implementation (files("libs/csvdataset-2.2.jar"))
 
