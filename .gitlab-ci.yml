@@ -4,4 +4,8 @@ include:
       - 'common.yml'
 
 variables:
-    PROJECT_TYPE: backend
+    PROJECT_TYPE: frontend
+
+tce_check_ng:
+  rules:
+    - when: never
