@@ -1,6 +1,10 @@
 FROM gradle:7.6.2-jdk17 as builder
 WORKDIR /app
 
+RUN addgroup --system group && adduser --system --ingroup group user
+RUN chown -R user:group /app
+USER user
+
 COPY . .
 
 RUN gradle build
@@ -10,9 +14,6 @@ ARG APP_NAME=holter
 ARG DATABASE_PATH
 
 COPY --from=builder app/build/libs/$APP_NAME*.jar app.jar
-
-RUN adduser -D user
-USER user
 
 WORKDIR /app
 
