@@ -5,17 +5,7 @@ include:
 
 variables:
     PROJECT_TYPE: frontend
-
-trigger:
-  stage: trigger
-  variables:
-    PROJECT_TYPE: chart
-    PARENT_PROJECT_TYPE: frontend
-    PARENT_CI_COMMIT_TAG: $CI_COMMIT_TAG
-    PARENT_CI_COMMIT_SHORT_SHA: $CI_COMMIT_SHORT_SHA
-  trigger:
-    project: devops/holter-devops/holter-devops-chart
-
+    
 tce_check_ng:
   rules:
     - when: never
