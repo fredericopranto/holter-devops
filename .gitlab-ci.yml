@@ -3,6 +3,9 @@ include:
     file: 
       - 'common.yml'
 
+variables:
+    PROJECT_TYPE: app
+
 tce_check_ng:
   rules:
     - when: never
