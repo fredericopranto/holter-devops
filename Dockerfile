@@ -7,7 +7,6 @@ RUN gradle build
 
 FROM eclipse-temurin:21-jre-alpine
 ARG APP_NAME=holter
-ARG DATABASE_PATH
 
 COPY --from=builder app/build/libs/$APP_NAME*.jar app.jar
 
