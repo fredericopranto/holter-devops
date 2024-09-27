@@ -16,7 +16,7 @@
 
     USER appuser
 
-    HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD curl --fail http://localhost:8080/actuator/health || exit 1
+    HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD curl --fail http://localhost:8080/holter/api/test || exit 1
 
     ENTRYPOINT ["java", "-jar", "app.jar", \
     "--spring.jpa.hibernate.ddl-auto=${JPA_HIBERNATE_DDL_AUTO}", \

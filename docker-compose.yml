@@ -51,20 +51,3 @@
       depends_on:
         postgres:
           condition: service_healthy
-
-    flyway:
-      container_name: flyway
-      image: flyway/flyway:9.15-alpine
-      volumes:
-        - ./sql:/flyway/sql
-      networks:
-        - holter-network
-      environment:
-        - FLYWAY_USER=${POSTGRES_USER}
-        - FLYWAY_PASSWORD=${POSTGRES_PASSWORD}
-        - FLYWAY_URL=jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-        - FLYWAY_BASELINE_VERSION=0.0
-      command: -connectRetries=60 -baselineOnMigrate=true migrate
-      depends_on:
-        postgres:
-          condition: service_healthy
