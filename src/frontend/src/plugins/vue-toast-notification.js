@@ -53,12 +53,13 @@ class VueToastrWrapper {
   }
 
   error(mensagens) {
+    const options = { duration: 0 };
     if (Array.isArray(mensagens)) {
       mensagens.forEach(m => {
-        Vue.$toast.error(m);
+        Vue.$toast.error(m, options);
       });
     } else {
-      Vue.$toast.error(mensagens);
+      Vue.$toast.error(mensagens, options);
     }
   }
 }
