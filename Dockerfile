@@ -8,9 +8,13 @@ RUN gradle build
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-COPY --from=builder app/build/libs/holter.jar app.jar
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+COPY --from=builder /app/build/libs/holter.jar app.jar
 
 EXPOSE 8080
+
+USER appuser
 
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD curl --fail http://localhost:8080/actuator/health || exit 1
 
