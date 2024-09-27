@@ -6,9 +6,9 @@ COPY . .
 RUN gradle build
 
 FROM eclipse-temurin:21-jre-alpine
-ARG APP_NAME=holter
+WORKDIR /app
 
-COPY --from=builder app/build/libs/$APP_NAME*.jar app.jar
+COPY --from=builder app/build/libs/holter.jar app.jar
 
 EXPOSE 8080
 
