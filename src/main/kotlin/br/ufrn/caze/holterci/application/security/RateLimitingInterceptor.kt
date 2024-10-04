@@ -17,7 +17,7 @@ class RateLimitingInterceptor :  HandlerInterceptor {
 
     // use this class to controle the rate limit
     // 240 request per minute
-    private val rateLimiter = TokenBucketRateLimiter(240, 1, TimeUnit.MINUTES)
+    private val rateLimiter = TokenBucketRateLimiter(500, 1, TimeUnit.MINUTES)
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         if (rateLimiter.tryAcquire()) {
