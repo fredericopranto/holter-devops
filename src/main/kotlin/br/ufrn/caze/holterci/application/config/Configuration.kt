@@ -51,7 +51,9 @@ class Configuration {
             override fun addCorsMappings(registry: CorsRegistry) {
                 registry
                     .addMapping("/**")
+                    .allowedOrigins("http://localhost:3000/holter") // Permitir apenas essa origem
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT")
+                    .allowCredentials(true) // Permitir credenciais, se necessário
             }
         }
     }

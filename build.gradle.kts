@@ -132,7 +132,7 @@ frontend {
 	nodeInstallDirectory.set(file("${projectDir}/src/frontend/.node"))
 	nodeDistributionUrlRoot.set("https://nodejs.org/dist/")
 	nodeVersion.set("16.15.0")
-	assembleScript.set("run build")
+	assembleScript.set("run build:prod")
 }
 
 val frontendFolder = File( "${buildDir}/resources/main/static" )
