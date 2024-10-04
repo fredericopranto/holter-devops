@@ -37,6 +37,6 @@ package br.ufrn.caze.holterci.domain.models.metric
 
 enum class Frequency {
 
-    WEEK, MONTH, YEAR
+    DAY, WEEK, MONTH, YEAR
 
 }

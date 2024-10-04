@@ -84,9 +84,12 @@ class CommitPerDayGitlabCollector
             currentReleaseDate = currentReleaseDate.plusDays(1) // next day
         }
 
-        // here not work median, because we can have a lot of day with zero commits, that generate commitPerDay = 0 and is not thrue
-        var meanCommitsPerWeekDay = mathUtil.meanOfLongValues(commitsPerDayList.toList() as List<Long>)
-        return Pair(meanCommitsPerWeekDay, generateMetricInfo(period, commitsOfPeriod, qtdTotalDays))
+        val commitsPerCodingDayList = commitsPerDayList.filter { it != 0L }
+        val qtdTotalCodingDays = commitsPerCodingDayList.size
+
+        // here not work median, because we can have a lot of day with zero commits, that generate commitPerDay = 0 and is not true
+        var meanCommitsPerWeekDay = mathUtil.meanOfLongValues(commitsPerCodingDayList.toList() as List<Long>)
+        return Pair(meanCommitsPerWeekDay, generateMetricInfo(period, commitsOfPeriod, qtdTotalCodingDays))
     }
 
     override fun cleanCache() {
