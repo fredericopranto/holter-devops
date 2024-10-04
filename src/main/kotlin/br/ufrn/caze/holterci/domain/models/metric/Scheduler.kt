@@ -73,7 +73,7 @@ class Scheduler {
      *
      */
     @Column(name = "frequency", nullable = false)
-    var frequencyOfExecution : Frequency = Frequency.MONTH
+    var frequencyOfExecution : Frequency = Frequency.WEEK2
 
     /**
      * Say whether the collection of automatic metric is active or not.

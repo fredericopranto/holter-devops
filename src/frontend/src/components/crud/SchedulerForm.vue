@@ -15,7 +15,13 @@
               <b-row>
                 <b-col sm="12" md="10" lg="8">
                   <b-form-group id="input-group-2" label="Select Frequency of Execution" label-for="input-2" description="Set the frequency where mesuares will be collected">
-                    <b-form-radio-group v-model="scheduler.frequencyOfExecution" class="pt-2" :options="['DAY', 'WEEK', 'MONTH', 'YEAR']"  :disabled="scheduler.id > 0"></b-form-radio-group>
+                    <b-form-radio-group v-model="scheduler.frequencyOfExecution" class="pt-2" :options="[
+                        { text: 'DAY', value: 'DAY' },
+                        { text: 'WEEK', value: 'WEEK' },
+                        { text: 'TWO WEEKS', value: 'WEEK2' },
+                        { text: 'MONTH', value: 'MONTH' },
+                        { text: 'YEAR', value: 'YEAR' }
+                    ]" :disabled="scheduler.id > 0"></b-form-radio-group>
                   </b-form-group>
                 </b-col>
               </b-row>
