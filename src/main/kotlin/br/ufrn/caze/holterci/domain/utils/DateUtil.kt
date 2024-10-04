@@ -99,6 +99,7 @@ class DateUtil {
             // include the int and end dates
             Frequency.DAY -> end = baseDate.plusDays(1).minusDays(1)
             Frequency.WEEK  ->  end = baseDate.plusDays(7).minusDays(1)
+            Frequency.WEEK2  ->  end = baseDate.plusDays(14).minusDays(1)
             Frequency.MONTH ->  end =  baseDate.plusMonths(1).minusDays(1)
             Frequency.YEAR  ->  end = baseDate.plusYears(1).minusDays(1)
         }
@@ -153,6 +154,7 @@ class DateUtil {
         when (frequency) {
             Frequency.DAY -> if(daysBetween < 1) return false
             Frequency.WEEK  -> if(daysBetween < 7) return false
+            Frequency.WEEK2  -> if(daysBetween < 14) return false
             Frequency.MONTH -> if(daysBetween < 30) return false
             Frequency.YEAR  -> if(daysBetween < 365) return false
         }
